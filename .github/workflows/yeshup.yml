@@ -17,6 +17,7 @@ jobs:
         yum -y group install "Development Tools"
         gcc --version
         make
+        sha1sum ./yeshup
     - name: Test
       run: |
         ./yeshup echo foo bar
