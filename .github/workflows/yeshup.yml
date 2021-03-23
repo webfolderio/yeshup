@@ -15,11 +15,11 @@ jobs:
       run: |
         yum -y update
         yum -y group install "Development Tools"
+        gcc --version
         make
     - name: Test
       run: |
-        mvn -q -B -DskipTests package
-        mvn test
+        ./yeshup echo foo bar
     - name: Archive library
       uses: actions/upload-artifact@v1
       with:
