@@ -1,0 +1,26 @@
+name: yeshup
+
+on:
+  [push]
+jobs:
+    name: centos
+    runs-on: ubuntu-latest
+    if: "contains(toJSON(github.event.commits.*.message), '[build centos]')"
+    container: centos:7
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout project
+    - name: Build
+      run: |
+        yum -y update
+        yum -y group install "Development Tools"
+        make
+    - name: Test
+      run: |
+        mvn -q -B -DskipTests package
+        mvn test
+    - name: Archive library
+      uses: actions/upload-artifact@v1
+      with:
+        name: yeshup
+        path: yeshup
