@@ -3,6 +3,7 @@ name: yeshup
 on:
   [push]
 jobs:
+  centos:
     name: centos
     runs-on: ubuntu-latest
     if: "contains(toJSON(github.event.commits.*.message), '[build centos]')"
